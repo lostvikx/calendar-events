@@ -2,8 +2,9 @@
 
 import datetime
 import os
+import json
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -12,9 +13,15 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 
+# Important function to authenticate the company account
 def authenticate_app(uri, creds):
   """
+  Args:
+    uri: list of Google Calendar API endpoints
+    creds: None if token.json file doesn't exists
   
+  Returns:
+    creds: Credentials object by Google
   """
   SCOPES = uri
 
@@ -38,7 +45,7 @@ def authenticate_app(uri, creds):
 
 def fetch_upcoming_events(creds, n_events):
   """
-  
+  Prints n events on the user's calendar.
   """
   try:
     service = build('calendar', 'v3', credentials=creds)
@@ -63,9 +70,44 @@ def fetch_upcoming_events(creds, n_events):
     print('An error occurred: %s' % error)
 
 
+def create_event(creds, event):
+  """
+  Creates a calendar event.
+  """
+  try:
+    service = build("calendar", "v3", credentials=creds)
+
+    evt = service.events().insert(calendarId="primary", body=event).execute()
+    print(f"Event created: {evt.get('htmlLink')}")
+
+  except HttpError as error:
+    print(f"An error occurred: {error}")
+
+
 def main():
-  creds = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
-  fetch_upcoming_events(creds=creds, n_events=10)
+  credentials = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
+
+  # fetch_upcoming_events(creds=credentials, n_events=10)
+
+  with open("test_event.json", "r") as f:
+    event = json.load(f)
+
+  # Testing
+  start_dateTime, end_dateTime = (event["start"]["dateTime"], event["end"]["dateTime"])
+
+  def parse_datetime(datetime_string):
+    return datetime.datetime.strptime(datetime_string, "%d %b %Y %H:%M").isoformat()
+
+  start_dateTime = parse_datetime(start_dateTime)
+  end_dateTime = parse_datetime(end_dateTime)
+
+  # print(start_dateTime, end_dateTime)
+
+  (event["start"]["dateTime"], event["end"]["dateTime"]) = start_dateTime, end_dateTime
+  # print(event["start"]["dateTime"])
+
+  create_event(creds=credentials, event=event)
+
 
 if __name__ == "__main__":
   main()
