@@ -1,0 +1,24 @@
+{
+  "summary": "Upcoming Medical Examination | HDFC Life",
+  "location": "Lower Parel, Mumbai, Maharashtra, India",
+  "description": "You have been scheduled for a medical examination at XYZ Diagnostic Center",
+  "start": {
+    "dateTime": "30 Jun 2022 13:00",
+    "timeZone": "Asia/Kolkata"
+  },
+  "end": {
+    "dateTime": "30 Jun 2022 14:00",
+    "timeZone": "Asia/Kolkata"
+  },
+  "attendees": [
+    {"email": "viknegi0@gmail.com"},
+    {"email": "viknegiepic@gmail.com"}
+  ],
+  "reminders": {
+    "useDefault": false,
+    "overrides": [
+      {"method": "email", "minutes": 1440},
+      {"method": "popup", "minutes": 30}
+    ]
+  }
+}
