@@ -86,8 +86,8 @@ def create_event(creds, event):
   """
   try:
     service = build("calendar", "v3", credentials=creds)
-    # sendUpdates: send email & notification on pone
-    evt = service.events().insert(calendarId="primary", body=event, sendUpdates="all").execute()
+    # TODO: sendUpdates="all": send email & notification on phone
+    evt = service.events().insert(calendarId="primary", body=event).execute()
     print(f"Event created: {evt.get('htmlLink')}")
     return evt
   except HttpError as error:
