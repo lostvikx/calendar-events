@@ -109,8 +109,10 @@ def main():
   dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
   load_dotenv(dotenv_path)
 
+  # Authenticate enterprise application
   credentials = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
 
+  # TESTING using JSON a file
   test_event = test_json("test_event.json")
   event_details = create_event(creds=credentials, event=test_event)
 
