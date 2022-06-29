@@ -2,17 +2,17 @@
 
 Set calendar events for better customer experience using the Google Calendar. Details are not to be disclosed.
 
-### Identified Vendors:
+### Identified Vendors
 * [Karza Tech](https://www.karza.in/)
 * [EY](https://www.ey.com/en_in/banking-capital-markets/list-screening) (Customer Screening)
 
-### Local Setup:
+### Local Setup
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Google Calendar API Docs Links:
+### Google Calendar API Docs Links
 * [Quickstart](https://developers.google.com/calendar/api/quickstart/python)
 * [Create Events](https://developers.google.com/calendar/api/guides/create-events)
 * [Insert Method](https://developers.google.com/calendar/api/v3/reference/events/insert)
@@ -21,3 +21,13 @@ pip install -r requirements.txt
 * [Error Handling](https://developers.google.com/calendar/api/guides/errors) (Important)
 * [Sharing & Attendees](https://developers.google.com/calendar/api/concepts/sharing)
 
+### App Directory Structure
+```bash
+.
+├── .env
+├── credentials.json
+├── event_details.json
+├── main.py
+├── test_event.json
+└── token.json
+```
