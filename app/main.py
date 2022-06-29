@@ -76,37 +76,34 @@ def create_event(creds, event):
   """
   try:
     service = build("calendar", "v3", credentials=creds)
-
-    evt = service.events().insert(calendarId="primary", body=event).execute()
-    print(f"Event created: {evt.get('htmlLink')}")
-
+    # sendUpdates: send email & notification on pone
+    evt = service.events().insert(calendarId="primary", body=event, sendUpdates="all").execute()
+    print(f"Event created: {evt.get('htmlLink')}\n")
+    return evt
   except HttpError as error:
     print(f"An error occurred: {error}")
 
 
-def main():
-  credentials = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
+def test_json(json_filename):
 
-  # fetch_upcoming_events(creds=credentials, n_events=10)
-
-  with open("test_event.json", "r") as f:
+  with open(json_filename, "r") as f:
     event = json.load(f)
-
-  # Testing
-  start_dateTime, end_dateTime = (event["start"]["dateTime"], event["end"]["dateTime"])
 
   def parse_datetime(datetime_string):
     return datetime.datetime.strptime(datetime_string, "%d %b %Y %H:%M").isoformat()
 
-  start_dateTime = parse_datetime(start_dateTime)
-  end_dateTime = parse_datetime(end_dateTime)
+  event["start"]["dateTime"] = parse_datetime(event["start"]["dateTime"])
+  event["end"]["dateTime"] = parse_datetime(event["end"]["dateTime"])
 
-  # print(start_dateTime, end_dateTime)
+  return event
 
-  (event["start"]["dateTime"], event["end"]["dateTime"]) = start_dateTime, end_dateTime
-  # print(event["start"]["dateTime"])
 
-  create_event(creds=credentials, event=event)
+def main():
+  credentials = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
+  # fetch_upcoming_events(creds=credentials, n_events=10)
+  event = test_json("test_event.json")
+  evt = create_event(creds=credentials, event=event)
+  print(evt)
 
 
 if __name__ == "__main__":
