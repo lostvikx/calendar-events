@@ -4,7 +4,7 @@ import datetime
 import os
 import json
 
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -23,7 +23,7 @@ def authenticate_app(uri, creds):
     creds: None if token.json file doesn't exists
   
   Returns:
-    creds: Credentials object by Google
+    creds: Credentials object by Google API
   """
   SCOPES = uri
 
@@ -45,40 +45,12 @@ def authenticate_app(uri, creds):
   return creds
 
 
-# Just for testing the API (not called)
-def fetch_upcoming_events(creds, n_events):
-  """
-  Prints n events on the user's calendar.
-  """
-  try:
-    service = build('calendar', 'v3', credentials=creds)
-
-    # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId='primary', timeMin=now, maxResults=n_events, singleEvents=True, orderBy='startTime').execute()
-
-    events = events_result.get('items', [])
-
-    if not events:
-      print('No upcoming events found.')
-      return
-
-    # Prints the start and name of the next n_events
-    for event in events:
-      start = event['start'].get('dateTime', event['start'].get('date'))
-      print(start, event['summary'])
-
-  except HttpError as error:
-    print('An error occurred: %s' % error)
-
-
 def create_event(creds, event):
   """
   Creates a calendar event.
 
   Args:
-    creds: Credentials from authentication
+    creds: Credentials for authentication
     event: dict with certain attributes specified in the docs
 
   Returns:
@@ -109,15 +81,51 @@ def test_json(json_filename):
   return event
 
 
+def update_event(event_id, creds, new_event):
+  """
+  Updates a calendar event.
+
+  Args:
+    event_id: string
+    creds: Credentials object
+    new_event: Object conforming to the event object structure
+  
+  Returns:
+    None
+  """
+  try:
+    service = build("calendar", "v3", credentials=creds)
+
+    updated_event = service.events().update(calendarId="primary", eventId=event_id, body=new_event).execute()
+
+    print(f"Event updated: {updated_event['updated']}")
+  except HttpError as error:
+    print(f"An error occurred: {error}")
+
+
 def main():
+
+  # Load any env vars
+  dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
+  load_dotenv(dotenv_path)
+
   credentials = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
-  # fetch_upcoming_events(creds=credentials, n_events=10)
+
   test_event = test_json("test_event.json")
   event_details = create_event(creds=credentials, event=test_event)
 
+  # TEMPORARY
   # Save event details in a file for reference
   with open("event_details.json", "w") as details_file:
     json.dump(event_details, details_file, indent=2, sort_keys=True)
+
+  # Save event_id with customer's client ID
+  # Read file for updated event
+  with open("event_details.json", "r") as details_file:
+    test_event_id = json.load(details_file)["id"]
+
+  # Update Event (Eg: customer reschedules event)
+  # update_event(test_event_id, creds=credentials, new_event=test_event)
 
 
 if __name__ == "__main__":
