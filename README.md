@@ -1,4 +1,4 @@
-# Customer Experience
+# Calendar Events for Customer Experience
 
 Set calendar events for better customer experience using the Google Calendar. Details are not to be disclosed.
 
@@ -20,6 +20,7 @@ pip install -r requirements.txt
 * [Service Account](https://developers.google.com/identity/protocols/oauth2/service-account)
 * [Error Handling](https://developers.google.com/calendar/api/guides/errors) (Important)
 * [Sharing & Attendees](https://developers.google.com/calendar/api/concepts/sharing)
+* [POC Document](https://docs.google.com/document/d/1w7g-m2A0DLtYsDwtqZbAdMQ48m0-4WdVWnAD99pJ878/edit?usp=sharing)
 
 ### App Directory Structure
 ```bash
