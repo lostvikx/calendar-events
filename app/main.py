@@ -13,9 +13,11 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 
-# Important function to authenticate the company account
+# Important function to authenticate the enterprise account
 def authenticate_app(uri, creds):
   """
+  Authenticate dev account.
+
   Args:
     uri: list of Google Calendar API endpoints
     creds: None if token.json file doesn't exists
@@ -43,6 +45,7 @@ def authenticate_app(uri, creds):
   return creds
 
 
+# Just for testing the API (not called)
 def fetch_upcoming_events(creds, n_events):
   """
   Prints n events on the user's calendar.
@@ -73,17 +76,25 @@ def fetch_upcoming_events(creds, n_events):
 def create_event(creds, event):
   """
   Creates a calendar event.
+
+  Args:
+    creds: Credentials from authentication
+    event: dict with certain attributes specified in the docs
+
+  Returns:
+    An event object, details returned from the API call.
   """
   try:
     service = build("calendar", "v3", credentials=creds)
     # sendUpdates: send email & notification on pone
     evt = service.events().insert(calendarId="primary", body=event, sendUpdates="all").execute()
-    print(f"Event created: {evt.get('htmlLink')}\n")
+    print(f"Event created: {evt.get('htmlLink')}")
     return evt
   except HttpError as error:
     print(f"An error occurred: {error}")
 
 
+# Simple data testing using a JSON file.
 def test_json(json_filename):
 
   with open(json_filename, "r") as f:
@@ -101,9 +112,12 @@ def test_json(json_filename):
 def main():
   credentials = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
   # fetch_upcoming_events(creds=credentials, n_events=10)
-  event = test_json("test_event.json")
-  event_details = create_event(creds=credentials, event=event)
-  print(event_details)
+  test_event = test_json("test_event.json")
+  event_details = create_event(creds=credentials, event=test_event)
+
+  # Save event details in a file for reference
+  with open("event_details.json", "w") as details_file:
+    json.dump(event_details, details_file, indent=2, sort_keys=True)
 
 
 if __name__ == "__main__":
