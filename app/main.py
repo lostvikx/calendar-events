@@ -102,8 +102,8 @@ def main():
   credentials = authenticate_app(["https://www.googleapis.com/auth/calendar"], None)
   # fetch_upcoming_events(creds=credentials, n_events=10)
   event = test_json("test_event.json")
-  evt = create_event(creds=credentials, event=event)
-  print(evt)
+  event_details = create_event(creds=credentials, event=event)
+  print(event_details)
 
 
 if __name__ == "__main__":
