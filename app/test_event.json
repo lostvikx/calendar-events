@@ -1,7 +1,7 @@
 {
   "summary": "Upcoming Medical Examination | HDFC Life",
-  "location": "Lower Parel, Mumbai, Maharashtra, India",
-  "description": "You have been scheduled for a medical examination at XYZ Diagnostic Center",
+  "location": "Sunshine Diagnostic Center, Bandra, Mumbai, Maharashtra, India",
+  "description": "You have been scheduled for a medical examination at Sunshine Diagnostic Center",
   "start": {
     "dateTime": "30 Jun 2022 13:00",
     "timeZone": "Asia/Kolkata"
@@ -11,9 +11,9 @@
     "timeZone": "Asia/Kolkata"
   },
   "attendees": [
-    {"email": "viknegi0@gmail.com"},
     {"email": "viknegiepic@gmail.com"}
   ],
+  "guestsCanSeeOtherGuests": false,
   "reminders": {
     "useDefault": false,
     "overrides": [
