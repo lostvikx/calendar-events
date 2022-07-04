@@ -10,6 +10,18 @@ from googleapiclient.errors import HttpError
 
 
 class Event:
+  """
+  Google calendar event object, authenticate on init.
+
+  Attributes:
+    `creds`: object
+      `token.json`, Google API token
+    service: build object
+  
+  Methods:
+    * update_event
+    * create_event
+  """
 
   def __init__(self, creds=None):
     """
