@@ -18,9 +18,6 @@ class Event:
       `token.json`, Google API token
     service: build object
   
-  Methods:
-    * update_event
-    * create_event
   """
 
   def __init__(self, creds=None):
