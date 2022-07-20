@@ -17,8 +17,8 @@ def parse_args():
   args = parser.parse_args()
   return args
 
-def main():
 
+def main():
   # Load any environment variables (API KEY NOT REQUIRED FOR CALENDAR EVENTS)
   dotenv_path = os.path.join(os.path.dirname(__file__), "../.env")
   load_dotenv(dotenv_path)
@@ -31,11 +31,11 @@ def main():
   args = parse_args()
   # Simulating create event scenario
   if args.create_event:
-    # Create Event
+    print("Creating event")
     event_details = event.create_event(event_object=test_event)
 
     # NOTE: Save a temp file!
-    with open("test/save_event_details.json", "w") as details_file:
+    with open("test/res_event_details.json", "w") as details_file:
       json.dump(event_details, details_file, indent=2, sort_keys=True)
 
 
@@ -43,8 +43,9 @@ def main():
   # TODO: Update event to be done using event_id
   # Simulating update event scenario
   if args.update_event:
+    print(f"Updating {args.update_event}")
     # TEST: Read file for updated event
-    with open("test/save_event_details.json", "r") as details_file:
+    with open("test/res_event_details.json", "r") as details_file:
       test_event_id = json.load(details_file)["id"]
 
     # TEST: Update Event (Eg: customer reschedules event)
