@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ├── event.py
 ├── main.py
 ├── test
-│   ├── save_event_details.json
+│   ├── res_event_details.json
 │   └── test_event.json
 └── utils.py
 ```
