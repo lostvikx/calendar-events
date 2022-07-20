@@ -25,10 +25,13 @@ pip install -r requirements.txt
 ### App Directory Structure
 ```bash
 .
-├── .env
-├── credentials.json
-├── event_details.json
+├── creds
+│   ├── credentials.json
+│   └── token.json
+├── event.py
 ├── main.py
-├── test_event.json
-└── token.json
+├── test
+│   ├── save_event_details.json
+│   └── test_event.json
+└── utils.py
 ```
