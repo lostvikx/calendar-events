@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import os
 
 from google.auth.transport.requests import Request
@@ -26,6 +24,7 @@ class Event:
 
     Args:
       `creds`: Google API credentials | default is `None`
+      `service`: API build object
     """
 
     # Authenticate the enterprise dev account
@@ -34,19 +33,21 @@ class Event:
 
     SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
-    if os.path.exists('token.json'):
-      self.creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    if os.path.exists('creds/token.json'):
+      self.creds = Credentials.from_authorized_user_file('creds/token.json', SCOPES)
 
     # If there are no (valid) credentials available, let the user log in.
     if not self.creds or not self.creds.valid:
       if self.creds and self.creds.expired and self.creds.refresh_token:
         self.creds.refresh(Request())
       else:
-        flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-        self.creds = flow.run_local_server(port=0)
+        flow = InstalledAppFlow.from_client_secrets_file('creds/credentials.json', SCOPES)
+        # Create a localhost:8080
+        self.creds = flow.run_local_server(port=8080)
 
+      # NOTE: creds/token.json is a temp file, the token will expire. (Remove the file if thrown an error)
       # Save the credentials for the next run
-      with open('token.json', 'w') as token:
+      with open('creds/token.json', 'w') as token:
         token.write(self.creds.to_json())
 
     # Serivce object:
