@@ -1,0 +1,51 @@
+{
+  "attendees": [
+    {
+      "email": "viknegiepic@gmail.com",
+      "responseStatus": "needsAction"
+    }
+  ],
+  "created": "2022-07-20T05:21:58.000Z",
+  "creator": {
+    "email": "viknegi0@gmail.com",
+    "self": true
+  },
+  "description": "You have been scheduled for a medical examination at Sunshine Diagnostic Center",
+  "end": {
+    "dateTime": "2022-07-23T15:00:00+05:30",
+    "timeZone": "Asia/Kolkata"
+  },
+  "etag": "\"3316589036553000\"",
+  "eventType": "default",
+  "guestsCanSeeOtherGuests": false,
+  "htmlLink": "https://www.google.com/calendar/event?eid=YWE3ODJvcXVkMDVwNHZkcWZhZTJra2FjOGcgdmlrbmVnaTBAbQ",
+  "iCalUID": "aa782oqud05p4vdqfae2kkac8g@google.com",
+  "id": "aa782oqud05p4vdqfae2kkac8g",
+  "kind": "calendar#event",
+  "location": "Sunshine Diagnostic Center, Bandra, Mumbai, Maharashtra, India",
+  "organizer": {
+    "email": "viknegi0@gmail.com",
+    "self": true
+  },
+  "reminders": {
+    "overrides": [
+      {
+        "method": "popup",
+        "minutes": 30
+      },
+      {
+        "method": "email",
+        "minutes": 1440
+      }
+    ],
+    "useDefault": false
+  },
+  "sequence": 0,
+  "start": {
+    "dateTime": "2022-07-23T13:00:00+05:30",
+    "timeZone": "Asia/Kolkata"
+  },
+  "status": "confirmed",
+  "summary": "Upcoming Medical Exam | HDFC Life",
+  "updated": "2022-07-20T05:21:58.302Z"
+}

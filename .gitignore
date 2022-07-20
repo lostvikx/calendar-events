@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 # Google API
+creds/
 credentials.json
 token.json
