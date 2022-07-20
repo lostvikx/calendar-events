@@ -132,3 +132,6 @@ dmypy.json
 creds/
 credentials.json
 token.json
+
+# Project Specific
+res_event_details.json
