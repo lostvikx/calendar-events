@@ -1,13 +1,13 @@
 {
   "summary": "Upcoming Medical Exam | HDFC Life",
   "location": "Sunshine Diagnostic Center, Bandra, Mumbai, Maharashtra, India",
-  "description": "You have been scheduled for a medical exam at Sunshine Diagnostic Center",
+  "description": "- You have been scheduled for a medical exam at Sunshine Diagnostic Center\n- Click on the Location to open Google Maps",
   "start": {
-    "dateTime": "23 Jul 2022 13:00",
+    "dateTime": "1 Oct 2022 13:00",
     "timeZone": "Asia/Kolkata"
   },
   "end": {
-    "dateTime": "23 Jul 2022 15:00",
+    "dateTime": "1 Oct 2022 15:00",
     "timeZone": "Asia/Kolkata"
   },
   "attendees": [
