@@ -2,6 +2,9 @@
 
 Set calendar events for better customer experience using the Google Calendar. Details are not to be disclosed.
 
+### Example Event
+![Example Image](calendar-events-example.jpg)
+
 ### Identified Vendors
 * [Karza Tech](https://www.karza.in/)
 * [EY](https://www.ey.com/en_in/banking-capital-markets/list-screening) (Customer Screening)
